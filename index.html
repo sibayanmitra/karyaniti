@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vakeel AI — Real Corpus Research</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#07070e;--ink2:#0f0f1a;--ink3:#181825;--ink4:#242433;--ink5:#2e2e42;
+  --gold:#c9a84c;--gold2:#e8c84a;--gold3:#a07830;
+  --text:#e4e4d8;--text2:#9090a0;--text3:#50506a;
+  --green:#2d6a4f;--green2:#4a9a6a;--green-bg:#0a1f14;
+  --red:#9a3030;--red2:#c05050;--red-bg:#1a0a0a;
+  --amber:#8a6e20;--amber2:#c09030;--amber-bg:#1a1408;
+  --blue:#2a5080;--blue2:#4080c0;--blue-bg:#080f1a;
+}
+html{background:var(--ink);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+body{min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--ink2)}::-webkit-scrollbar-thumb{background:var(--ink5);border-radius:3px}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;padding-bottom:1.1rem;border-bottom:1px solid var(--ink5)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-icon{width:30px;height:30px;border:1px solid var(--gold3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.brand-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--gold2)}
+.brand-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.12em}
+.ik-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--green-bg);color:var(--green2);border:1px solid var(--green);border-radius:4px;padding:4px 10px}
+.health-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;margin-right:5px}
+.health-dot.ok{background:var(--green2)}.health-dot.err{background:var(--red2)}
+
+/* Status bar */
+.status-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
+.sc{background:var(--ink2);border:1px solid var(--ink4);border-radius:6px;padding:8px 12px}
+.sc-val{font-family:'IBM Plex Mono',monospace;color:var(--gold2);font-size:13px;font-weight:500;display:block;margin-bottom:2px}
+.sc-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+
+/* Controls */
+.ctrl-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:.8rem;align-items:start}
+.doctypes select,.mode-select{background:var(--ink2);border:1px solid var(--ink4);border-radius:6px;color:var(--text);padding:7px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;outline:none;cursor:pointer;width:100%}
+.doctypes select:focus,.mode-select:focus{border-color:var(--gold3)}
+
+/* Model selector panel */
+.model-panel{background:var(--ink2);border:1px solid var(--ink4);border-radius:8px;margin-bottom:1rem;overflow:hidden}
+.model-panel-header{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;cursor:pointer;border-bottom:1px solid var(--ink4);user-select:none}
+.model-panel-header:hover{background:var(--ink3)}
+.model-panel-title{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);display:flex;align-items:center;gap:6px}
+.model-panel-title::before{content:'│';color:var(--gold3)}
+.model-panel-subtitle{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3)}
+.model-panel-chev{font-size:10px;color:var(--text3);transition:transform .2s}
+.model-panel-chev.open{transform:rotate(180deg)}
+.model-panel-body{display:none;padding:12px 14px}
+.model-panel-body.open{display:block}
+.model-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.model-slot{display:flex;flex-direction:column;gap:4px}
+.model-slot-label{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3)}
+.model-slot select{background:var(--ink3);border:1px solid var(--ink5);border-radius:5px;color:var(--text2);padding:6px 8px;font-family:'IBM Plex Mono',monospace;font-size:10px;outline:none;cursor:pointer;width:100%}
+.model-slot select:focus{border-color:var(--gold3);color:var(--text)}
+.model-slot select option{background:var(--ink2)}
+.model-reset{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;background:transparent;border:1px solid var(--ink5);border-radius:5px;padding:4px 9px;cursor:pointer;color:var(--text3);transition:all .15s}
+.model-reset:hover{border-color:var(--text3);color:var(--text)}
+.model-cost-note{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);margin-top:8px;line-height:1.7;padding:6px 8px;background:var(--ink3);border-radius:4px}
+
+/* Query */
+.qlabel{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.4rem;display:flex;align-items:center;gap:5px}
+.qlabel::before{content:'';width:8px;height:1px;background:var(--gold3)}
+textarea.qi{width:100%;min-height:70px;resize:vertical;background:var(--ink2);border:1px solid var(--ink4);border-radius:8px;color:var(--text);padding:11px 13px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;line-height:1.5;margin-bottom:.6rem}
+textarea.qi:focus{border-color:var(--gold3)}
+textarea.qi::placeholder{color:var(--text3)}
+.examples{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem}
+.ex-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3);width:100%;text-transform:uppercase;letter-spacing:.1em}
+.ex{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--text2);border:1px solid var(--ink5);border-radius:4px;padding:3px 8px;cursor:pointer;transition:all .15s}
+.ex:hover{border-color:var(--gold3);color:var(--gold2)}
+.ex.warn{border-color:var(--amber);color:var(--amber2)}
+
+/* Action bar */
+.action-row{display:flex;align-items:center;gap:8px;margin-bottom:1.1rem;flex-wrap:wrap}
+.btn-run{display:flex;align-items:center;gap:7px;background:var(--gold);color:var(--ink);border:none;border-radius:7px;padding:9px 20px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-run:hover:not(:disabled){background:var(--gold2)}
+.btn-run:disabled{opacity:.4;cursor:not-allowed}
+.spin{display:none;width:12px;height:12px;border:2px solid var(--ink)40;border-top-color:var(--ink);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-run.loading .spin{display:block}
+.btn-sec{background:transparent;border:1px solid var(--ink5);border-radius:7px;padding:9px 12px;color:var(--text2);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:12px;transition:all .15s}
+.btn-sec:hover{border-color:var(--text3);color:var(--text)}
+.stat-pill{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 10px;border-radius:4px}
+.s-idle{background:var(--ink3);color:var(--text3);border:1px solid var(--ink5)}
+.s-run{background:var(--blue-bg);color:var(--blue2);border:1px solid var(--blue)}
+.s-done{background:var(--green-bg);color:var(--green2);border:1px solid var(--green)}
+.s-err{background:var(--red-bg);color:var(--red2);border:1px solid var(--red)}
+
+/* Trace */
+.trace{background:var(--ink2);border:1px solid var(--ink4);border-radius:8px;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.8;max-height:240px;overflow-y:auto;min-height:46px;margin-bottom:1.25rem}
+.tl{animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}
+.ti{color:#4080c0}.tok{color:#4a9a6a}.tw{color:#c09030}.te{color:#c05050}.tr{color:var(--gold)}.td{color:var(--text3)}
+
+/* Results */
+.rh{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.8rem;display:flex;align-items:center;gap:6px}
+.rh::before{content:'';width:8px;height:1px;background:var(--gold3)}
+.card{background:var(--ink2);border:1px solid var(--ink4);border-radius:10px;margin-bottom:10px;overflow:hidden;transition:border-color .15s}
+.card:hover{border-color:var(--ink5)}.card.pass{border-left:3px solid var(--green)}.card.fail{border-left:3px solid var(--red);opacity:.55}
+.ch{padding:12px 14px;cursor:pointer;display:flex;align-items:flex-start;gap:9px}
+.ck{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3);width:18px;flex-shrink:0;margin-top:2px}
+.cm{flex:1;min-width:0}
+.cc{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:500;color:var(--text);margin-bottom:2px;line-height:1.3}
+.cmt{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3)}
+.cmt .gold{color:var(--gold3)}
+.cp{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.5}
+.cbg{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;align-items:center}
+.badge{font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;border:1px solid;font-weight:500}
+.bp{background:var(--green-bg);color:var(--green2);border-color:var(--green)}
+.bf{background:var(--red-bg);color:var(--red2);border-color:var(--red)}
+.bu{background:var(--amber-bg);color:var(--amber2);border-color:var(--amber)}
+.bg{background:var(--ink3);color:var(--text3);border-color:var(--ink5)}
+.cbr{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text3)}
+.cbb{width:44px;height:3px;background:var(--ink5);border-radius:2px;overflow:hidden}
+.cbf{height:100%;background:var(--gold3);border-radius:2px;transition:width .4s}
+.cchev{font-size:10px;color:var(--text3);margin-left:6px;margin-top:2px;transition:transform .2s}
+.cchev.open{transform:rotate(180deg)}
+.cbody{padding:0 14px 14px;border-top:1px solid var(--ink4);display:none}
+.cbody.open{display:block}
+.st{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin:9px 0 4px;display:flex;align-items:center;gap:4px}
+.st::before{content:'│';color:var(--gold3)}
+.hq{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--text);line-height:1.7;padding-left:11px;border-left:2px solid var(--gold3)50;margin:3px 0 9px}
+.pt{font-size:11px;color:var(--text2);line-height:1.7;background:var(--ink3);border-radius:6px;padding:8px 10px}
+.audit{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);background:var(--ink3);border-radius:6px;padding:8px 10px;line-height:1.8}
+.al{display:flex;gap:8px}.ak{color:var(--text3);min-width:130px;font-size:9px}
+.avok{color:var(--green2)}.avw{color:var(--amber2)}.avf{color:var(--red2)}.av{color:var(--text2)}
+.copy-btn{display:inline-flex;align-items:center;gap:5px;margin-top:9px;font-family:'IBM Plex Mono',monospace;font-size:10px;background:var(--ink3);border:1px solid var(--ink5);border-radius:5px;padding:4px 9px;cursor:pointer;color:var(--text2);transition:all .15s}
+.copy-btn:hover{border-color:var(--gold3);color:var(--gold2)}.copy-btn.copied{border-color:var(--green);color:var(--green2)}
+.ik-link{display:inline-flex;align-items:center;gap:5px;margin-top:6px;margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--blue2);text-decoration:none;transition:color .15s}
+.ik-link:hover{color:var(--gold2)}
+.pw{background:var(--amber-bg);border:1px solid var(--amber);border-radius:8px;padding:11px 14px;margin-bottom:1rem;font-size:12px;color:var(--amber2);line-height:1.6}
+.pw strong{color:#d4a030}
+.note-box{background:var(--ink2);border:1px solid var(--ink4);border-radius:10px;overflow:hidden;margin-bottom:1.1rem}
+.note-header{padding:8px 14px;border-bottom:1px solid var(--ink4);background:var(--ink3);font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);display:flex;align-items:center;gap:6px}
+.note-header::before{content:'│';color:var(--gold3)}
+.note-body{padding:15px 17px}
+.note-body pre{font-family:'Cormorant Garamond',serif;font-size:14px;line-height:1.85;color:var(--text);white-space:pre-wrap}
+.disc{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3);background:var(--ink2);border:1px solid var(--ink4);border-radius:8px;padding:9px 13px;margin-top:1rem;line-height:1.7}
+.disc strong{color:var(--text2)}
+.ik-attr{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:6px;margin-bottom:1rem;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3)}
+.ik-attr span{color:var(--green2)}
+option{background:var(--ink2)}
+optgroup{color:var(--text3);font-size:9px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">⚖</div>
+    <div>
+      <div class="brand-name">Vakeel AI</div>
+      <div class="brand-sub">Real Corpus · Verified Sources · Council Pipeline</div>
+    </div>
+  </div>
+  <div class="ik-badge"><span class="health-dot" id="ikDot"></span>Corpus <span id="ikStatus">checking…</span></div>
+</header>
+
+<div class="status-bar">
+  <div class="sc"><span class="sc-val" id="sCases">—</span><span class="sc-lbl">Cases retrieved</span></div>
+  <div class="sc"><span class="sc-val" id="sPassed">—</span><span class="sc-lbl">Holdings PASS</span></div>
+  <div class="sc"><span class="sc-val" id="sTime">—</span><span class="sc-lbl">Last query time</span></div>
+</div>
+
+<div class="ctrl-row">
+  <div class="doctypes">
+    <div class="qlabel" style="margin-bottom:.3rem">Search scope</div>
+    <select id="doctypes">
+      <option value="supremecourt" selected>Supreme Court of India</option>
+      <option value="highcourts">All High Courts</option>
+      <option value="judgments">SC + HC + District Courts</option>
+      <option value="delhi">Delhi High Court</option>
+      <option value="bombay">Bombay High Court</option>
+      <option value="madras">Madras High Court</option>
+      <option value="kolkata">Calcutta High Court</option>
+      <option value="allahabad">Allahabad High Court</option>
+      <option value="karnataka">Karnataka High Court</option>
+      <option value="kerala">Kerala High Court</option>
+      <option value="punjab">Punjab &amp; Haryana HC</option>
+      <option value="tribunals">Tribunals</option>
+    </select>
+  </div>
+  <div>
+    <div class="qlabel" style="margin-bottom:.3rem">Pipeline mode</div>
+    <select class="mode-select" id="mode">
+      <option value="quick" selected>Quick · 4 calls</option>
+      <option value="full">Full Council · 8–12 calls</option>
+    </select>
+  </div>
+</div>
+
+<!-- Model selector panel -->
+<div class="model-panel">
+  <div class="model-panel-header" onclick="toggleModels()">
+    <div class="model-panel-title">Model configuration
+      <span class="model-panel-subtitle" id="modelSummary">all free defaults</span>
+    </div>
+    <span class="model-panel-chev" id="modelChev">▾</span>
+  </div>
+  <div class="model-panel-body" id="modelBody">
+    <div class="model-grid" id="modelGrid">
+      <!-- JS builds these dynamically with search inputs -->
+      <div class="model-slot" id="slot_m_extractor">
+        <span class="model-slot-label">Extractor (holdings)</span>
+        <select id="m_extractor"><option>Loading…</option></select>
+      </div>
+      <div class="model-slot" id="slot_m_adversary">
+        <span class="model-slot-label">Adversary (stress test)</span>
+        <select id="m_adversary"><option>Loading…</option></select>
+      </div>
+      <div class="model-slot" id="slot_m_judge">
+        <span class="model-slot-label">Judge (final PASS/FAIL)</span>
+        <select id="m_judge"><option>Loading…</option></select>
+      </div>
+      <div class="model-slot" id="slot_m_synthesis">
+        <span class="model-slot-label">Synthesis (research note)</span>
+        <select id="m_synthesis"><option>Loading…</option></select>
+      </div>
+    </div>
+    <div class="model-cost-note" id="costNote">
+      Free models: $0 — unlimited but may 503. Paid models billed via OpenRouter to your key.<br>
+      Rough cost per query (4 docs): free≈$0 · Sonnet≈$0.20 · GPT-4.1≈$0.15 · Gemini Flash≈$0.03
+    </div>
+    <button class="model-reset" onclick="resetModels()">↺ Reset to free defaults</button>
+  </div>
+</div>
+
+<div class="qlabel">Legal query — keyword style</div>
+<textarea class="qi" id="query" placeholder="natural justice audi alteram partem administrative decision&#10;&#10;or: electronic evidence admissibility section 65B evidence act"></textarea>
+
+<div class="examples">
+  <div class="ex-lbl">↳ Example queries</div>
+  <div class="ex" data-q="electronic evidence admissibility section 65B evidence act">65B electronic evidence</div>
+  <div class="ex" data-q="writ petition maintainability Article 226 alternative statutory remedy exception">Art 226 alt remedy</div>
+  <div class="ex" data-q="partnership firm legal status death of partner rights obligations">Partner death firm</div>
+  <div class="ex" data-q="writ petition private body public function Article 226">Writ private body</div>
+  <div class="ex" data-q="natural justice audi alteram partem administrative decision exception urgency">Natural justice</div>
+  <div class="ex" data-q="anticipatory bail conditions Section 438 CrPC scope power">Anticipatory bail</div>
+  <div class="ex warn" data-q="Supreme Court ruling declaring preventive detention unconstitutional India">⚠ False premise test</div>
+</div>
+
+<div class="action-row">
+  <button class="btn-run" id="btnRun">
+    <div class="spin"></div>
+    Search Case Law →
+  </button>
+  <button class="btn-sec" id="btnClear">Clear</button>
+  <div class="stat-pill s-idle" id="statPill">Idle</div>
+</div>
+
+<div class="qlabel">Pipeline trace</div>
+<div class="trace" id="trace"><span class="td">Waiting for query…</span></div>
+
+<div id="results"></div>
+
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+// ── Free model defaults ──
+const FREE_DEFAULTS = {
+  m_extractor: "nvidia/nemotron-3-super-120b-a12b:free",
+  m_adversary: "deepseek/deepseek-chat-v3.1:free",
+  m_judge:     "nvidia/nemotron-3-super-120b-a12b:free",
+  m_synthesis: "inclusionai/ling-2.6-1t:free"
+};
+
+const SLOTS = ['m_extractor','m_adversary','m_judge','m_synthesis'];
+let allModels = {free:[], paid:[]};
+let filterTimers = {};
+
+// ── Build a select element with search + grouped options ──
+function buildSelect(slotId, data, defaultId) {
+  const wrap = $('slot_' + slotId) || $(slotId).parentElement;
+  wrap.innerHTML = `<span class="model-slot-label">${wrap.querySelector('.model-slot-label').textContent}</span>`;
+
+  // Search box
+  const searchWrap = document.createElement('div');
+  searchWrap.style.cssText = 'position:relative;margin-bottom:4px';
+  const inp = document.createElement('input');
+  inp.type = 'text';
+  inp.placeholder = 'Filter models…';
+  inp.id = slotId + '_search';
+  inp.style.cssText = 'width:100%;background:var(--ink3);border:1px solid var(--ink5);border-radius:5px;color:var(--text2);padding:5px 8px;font-family:"IBM Plex Mono",monospace;font-size:10px;outline:none';
+  inp.addEventListener('focus', ()=>{ inp.style.borderColor='var(--gold3)'; });
+  inp.addEventListener('blur',  ()=>{ inp.style.borderColor='var(--ink5)'; });
+  searchWrap.appendChild(inp);
+  wrap.appendChild(searchWrap);
+
+  // Select
+  const sel = document.createElement('select');
+  sel.id = slotId;
+  sel.style.cssText = 'background:var(--ink3);border:1px solid var(--ink5);border-radius:5px;color:var(--text2);padding:6px 8px;font-family:"IBM Plex Mono",monospace;font-size:10px;outline:none;cursor:pointer;width:100%';
+  sel.addEventListener('focus', ()=>sel.style.borderColor='var(--gold3)');
+  sel.addEventListener('blur',  ()=>sel.style.borderColor='var(--ink5)');
+  populateSelect(sel, data, defaultId, '');
+  sel.addEventListener('change', updateModelSummary);
+  wrap.appendChild(sel);
+
+  // Wire search
+  inp.addEventListener('input', ()=>{
+    clearTimeout(filterTimers[slotId]);
+    filterTimers[slotId] = setTimeout(()=>{
+      const val = sel.value;
+      populateSelect(sel, allModels, val, inp.value.toLowerCase().trim());
+    }, 120);
+  });
+}
+
+function populateSelect(sel, data, currentVal, filter) {
+  sel.innerHTML = '';
+  const groups = [
+    {label: '── FREE SOTA ──────────────', models: data.free},
+    {label: '── PAID FRONTIER ──────────', models: data.paid},
+  ];
+  let totalShown = 0;
+  groups.forEach(g => {
+    const filtered = filter
+      ? g.models.filter(m => m.label.toLowerCase().includes(filter) || m.id.toLowerCase().includes(filter))
+      : g.models;
+    if (!filtered.length) return;
+    const og = document.createElement('optgroup');
+    og.label = g.label;
+    filtered.forEach(m => {
+      const o = document.createElement('option');
+      o.value = m.id;
+      o.textContent = m.label;
+      if (m.id === currentVal) o.selected = true;
+      og.appendChild(o);
+      totalShown++;
+    });
+    sel.appendChild(og);
+  });
+  if (!totalShown) {
+    const o = document.createElement('option');
+    o.textContent = 'No matches'; o.disabled = true;
+    sel.appendChild(o);
+  }
+  // Re-select if current value exists
+  if (currentVal) sel.value = currentVal;
+}
+
+// ── Load models from server ──
+async function loadModels(){
+  try{
+    const r = await fetch('/api/models');
+    allModels = await r.json();
+  }catch(e){
+    console.warn('Could not load models:', e);
+    allModels = {
+      free: Object.values(FREE_DEFAULTS).map(id=>({id, label:id.split('/').pop()})),
+      paid: []
+    };
+  }
+  SLOTS.forEach(slotId => {
+    buildSelect(slotId, allModels, FREE_DEFAULTS[slotId]);
+  });
+  updateModelSummary();
+}
+
+function updateModelSummary(){
+  const hasPaid = SLOTS.some(id => { const s=$(id); return s && !s.value.endsWith(':free'); });
+  const allFree = SLOTS.every(id => { const s=$(id); return !s || s.value.endsWith(':free'); });
+  $('modelSummary').textContent = allFree ? 'all free defaults' :
+    hasPaid ? 'some paid models active — costs apply' : 'custom free config';
+  $('modelSummary').style.color = hasPaid ? 'var(--amber2)' : 'var(--text3)';
+}
+
+function toggleModels(){
+  $('modelBody').classList.toggle('open');
+  $('modelChev').classList.toggle('open');
+}
+
+function resetModels(){
+  SLOTS.forEach(slotId => {
+    const sel = $(slotId);
+    if(sel) sel.value = FREE_DEFAULTS[slotId];
+  });
+  // Clear search boxes
+  SLOTS.forEach(id => { const s=$(id+'_search'); if(s) s.value=''; });
+  populateSelectsFromCache();
+  updateModelSummary();
+}
+
+function populateSelectsFromCache(){
+  SLOTS.forEach(slotId => {
+    const sel = $(slotId);
+    if(sel) populateSelect(sel, allModels, sel.value, '');
+  });
+}
+
+// ── Health check ──
+async function checkHealth(){
+  try{
+    const r=await fetch('/api/health');
+    const d=await r.json();
+    const ok=d.ik_token==='set'&&d.or_key==='set';
+    $('ikDot').className='health-dot '+(ok?'ok':'err');
+    $('ikStatus').textContent=ok?'connected':(d.ik_token!=='set'?'token missing':'OR key missing');
+  }catch{
+    $('ikDot').className='health-dot err';
+    $('ikStatus').textContent='server offline';
+  }
+}
+
+// ── Examples ──
+document.querySelectorAll('.ex').forEach(el=>{
+  el.onclick=()=>{ $('query').value=el.dataset.q; };
+});
+
+// ── Trace ──
+const trace=$('trace');
+let traceFirst=true;
+function tlog(msg,cls='td'){
+  if(traceFirst){trace.innerHTML='';traceFirst=false;}
+  const d=document.createElement('div');
+  d.className='tl '+cls; d.textContent=msg;
+  trace.appendChild(d); trace.scrollTop=trace.scrollHeight;
+}
+
+// ── Status ──
+function setStat(cls,txt){ const p=$('statPill'); p.className='stat-pill '+cls; p.textContent=txt; }
+
+// ── Render holdings ──
+function renderCard(h,idx){
+  const cp=Math.round((h.judge_conf||0)*100);
+  const mu = h.models_used || {};
+  return `<div class="card ${h.pass?'pass':'fail'}" id="card${idx}">
+<div class="ch" onclick="tc(${idx})">
+  <div class="ck">${idx+1}.</div>
+  <div class="cm">
+    <div class="cc">${esc(h.case_name)}</div>
+    <div class="cmt">${esc(h.citation||'citation unknown')} <span class="gold">·</span> Para ${h.para_num} <span class="gold">·</span> ${h.is_ratio?'Ratio':'Dicta'} <span class="gold">·</span> ${esc(h.court)}</div>
+    <div class="cp">${esc(h.prop)}</div>
+    <div class="cbg">
+      <span class="badge ${h.pass?'bp':'bf'}">${h.pass?'JUDGE PASS':'JUDGE FAIL'}</span>
+      <span class="badge bu">Treatment Unverified</span>
+      <span class="badge ${h.L1?'bp':'bf'}">${h.L1?'L1 ✓':'L1 ✗'}</span>
+      <span class="badge ${h.adv_verdict==='SUPPORTED'?'bp':h.adv_verdict==='NOT_SUPPORTED'?'bf':'bg'}">${esc(h.adv_verdict||'?')}</span>
+      <div class="cbr"><div class="cbb"><div class="cbf" style="width:${cp}%"></div></div><span>${cp}%</span></div>
+    </div>
+  </div>
+  <div class="cchev" id="chev${idx}">▾</div>
+</div>
+<div class="cbody" id="body${idx}">
+  <div class="st">Verbatim holding (from verified corpus)</div>
+  <div class="hq">"${esc(h.verbatim||h.prop)}"</div>
+  <div class="st">Source paragraph — Para ${h.para_num}</div>
+  <div class="pt">${esc((h.para_text||'').slice(0,600))}${(h.para_text||'').length>600?'…':''}</div>
+  <div class="st">Council audit</div>
+  <div class="audit">
+    <div class="al"><span class="ak">String anchor (L1)</span><span class="${h.L1?'avok':'avf'}">${h.L1?'verified in source text':'NOT FOUND — rejected'}</span></div>
+    <div class="al"><span class="ak">Negation (L3)</span><span class="${h.L3?'avok':'avf'}">${h.L3?'clean':'negation language found'}</span></div>
+    <div class="al"><span class="ak">Atomic (L4)</span><span class="${h.L4ok?'avok':'avw'}">${h.L4ok?'all atoms grounded':('partial: '+(h.L4f||[]).join(', '))}</span></div>
+    <div class="al"><span class="ak">Adversary</span><span class="${h.adv_verdict==='SUPPORTED'?'avok':h.adv_verdict==='NOT_SUPPORTED'?'avf':'avw'}">${esc(h.adv_verdict||'skipped')}</span></div>
+    <div class="al"><span class="ak">Skeptic flag</span><span class="${h.sf?'avw':'avok'}">${h.sf?'flagged ambiguous':'clean'}</span></div>
+    <div class="al"><span class="ak">Judge</span><span class="${h.pass?'avok':'avf'}">${h.pass?'PASS':'FAIL'} — ${esc(h.judge_reason||'')}</span></div>
+    ${mu.extractor?`<div class="al" style="margin-top:5px;border-top:1px solid var(--ink5);padding-top:5px"><span class="ak">Models used</span><span style="color:var(--text3);font-size:9px">${esc(mu.extractor.split('/').pop())} / ${esc((mu.judge||'').split('/').pop())}</span></div>`:''}
+  </div>
+  <div style="display:flex;align-items:center;margin-top:10px">
+    <div class="copy-btn" onclick="cc(this,'${esc(h.case_name)}, ${esc(h.citation||'')}')">⎘ Copy citation</div>
+    <a class="ik-link" href="${esc(h.ik_url||'#')}" target="_blank" rel="noopener">↗ Source judgment</a>
+  </div>
+</div>
+</div>`;
+}
+
+function render(data){
+  const {note,holdings,premise_warn,stats}=data;
+  let h='';
+  $('sCases').textContent=stats?.docs??'—';
+  $('sPassed').textContent=`${stats?.passed??0} / ${stats?.total??0}`;
+  $('sTime').textContent=stats?.elapsed?stats.elapsed+'s':'—';
+
+  if(premise_warn?.has_false_premise)
+    h+=`<div class="pw"><strong>⚠ False premise detected</strong><br>${esc(premise_warn.assumed_fact)}<br><span style="opacity:.7">${esc(premise_warn.explanation)}</span></div>`;
+
+  if(note){
+    h+=`<div class="note-box">
+<div class="note-header">Research Note — from verified legal corpus</div>
+<div class="note-body"><pre>${esc(note)}</pre></div>
+</div>`;
+  }
+
+  const passed=(holdings||[]).filter(h=>h.pass);
+  const failed=(holdings||[]).filter(h=>!h.pass);
+
+  if(passed.length){
+    h+=`<div class="rh">Verified holdings (${passed.length})</div>`;
+    passed.forEach((hh,i)=>h+=renderCard(hh,i));
+  }
+  if(failed.length){
+    h+=`<div class="rh" style="margin-top:1rem;opacity:.6">Failed verification (${failed.length})</div>`;
+    failed.forEach((hh,i)=>h+=renderCard(hh,passed.length+i));
+  }
+
+  h+=`<div class="disc">
+<strong>Important:</strong> Treatment status is unverified — verify via SCC Online or Manupatra before citing in court.
+Council pipeline: L1 string verification · L3 negation check · L4 atomic decomposition · adversary stress-test · judge PASS/FAIL.
+</div>
+<div style="margin-top:.75rem;padding:8px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:6px;font-family:var(--font-mono,'IBM Plex Mono',monospace);font-size:10px;color:var(--text3)">
+  Data sourced from official Indian court records.
+  Holdings are AI-extracted and unverified — verify with primary source before citing in court.
+</div>`;
+
+  $('results').innerHTML=h;
+}
+
+// ── Main pipeline ──
+async function run(){
+  const q=$('query').value.trim();
+  if(!q){alert('Enter a legal query');return;}
+
+  traceFirst=true;
+  $('results').innerHTML='';
+  $('btnRun').disabled=true;
+  $('btnRun').classList.add('loading');
+  setStat('s-run','Running…');
+  $('sCases').textContent='—'; $('sPassed').textContent='—'; $('sTime').textContent='—';
+
+  const body={
+    query:q,
+    doctypes:$('doctypes').value,
+    mode:$('mode').value,
+    extractor_model: $('m_extractor')?.value || '',
+    adversary_model: $('m_adversary')?.value || '',
+    judge_model:     $('m_judge')?.value     || '',
+    synthesis_model: $('m_synthesis')?.value || '',
+  };
+
+  let allData={holdings:[],note:'',stats:{},premise_warn:null};
+
+  try{
+    const resp=await fetch('/api/research',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+
+    const reader=resp.body.getReader();
+    const dec=new TextDecoder();
+    let buf='';
+
+    while(true){
+      const{done,value}=await reader.read();
+      if(done) break;
+      buf+=dec.decode(value,{stream:true});
+      const lines=buf.split('\n');
+      buf=lines.pop()||'';
+      for(const line of lines){
+        if(!line.startsWith('data: ')) continue;
+        const raw=line.slice(6).trim();
+        if(!raw) continue;
+        try{
+          const e=JSON.parse(raw);
+          handleEvent(e,allData);
+        }catch{}
+      }
+    }
+  }catch(err){
+    tlog('✗ '+err.message,'te');
+    setStat('s-err','Error');
+  }finally{
+    $('btnRun').disabled=false;
+    $('btnRun').classList.remove('loading');
+  }
+}
+
+function handleEvent(e,allData){
+  const type=e.type;
+  if(type==='complete'){
+    allData.note=e.note; allData.holdings=e.holdings||[];
+    allData.stats=e.stats||{}; allData.premise_warn=e.premise_warn;
+    render(allData);
+    setStat('s-done',e.message||'Done');
+    tlog(e.message||'Done','tok');
+  }else if(type==='models'){
+    tlog('⚙ '+e.message,'ti');
+  }else if(type==='error'){
+    tlog('✗ '+e.message,'te'); setStat('s-err','Error');
+  }else if(type==='premise_warn'){
+    tlog('⚠ '+e.message,'tw'); tlog('  '+e.detail,'td');
+  }else if(type==='judge_verdict'){
+    tlog((e.passed?'  ✓ PASS':'  ✗ FAIL')+': '+(e.message||''),e.passed?'tok':'te');
+  }else if(type==='warning'){
+    tlog('⚠ '+e.message,'tw');
+  }else if(type==='council_start'||type==='judging'){
+    tlog('▸ '+e.message,'tr');
+  }else if(e.message){
+    const cls=type.includes('ok')||type.includes('done')||type.includes('found')?'tok':
+              type.includes('err')?'te':'td';
+    tlog((type.startsWith('fetch')||type.startsWith('search')||type==='thinking'?'▸ ':'  ')+e.message,cls);
+  }
+}
+
+function tc(i){ const b=$('body'+i),c=$('chev'+i); if(!b)return; b.classList.toggle('open'); c.classList.toggle('open'); }
+function cc(el,cite){
+  navigator.clipboard.writeText(cite).then(()=>{
+    el.classList.add('copied'); el.textContent='✓ Copied';
+    setTimeout(()=>{el.classList.remove('copied'); el.innerHTML='⎘ Copy citation';},2000);
+  });
+}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+$('btnRun').onclick=run;
+$('query').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))run();});
+$('btnClear').onclick=()=>{
+  $('query').value=''; $('results').innerHTML='';
+  trace.innerHTML='<span class="td">Waiting for query…</span>';
+  traceFirst=true; setStat('s-idle','Idle');
+  $('sCases').textContent='—'; $('sPassed').textContent='—'; $('sTime').textContent='—';
+};
+
+// Init
+checkHealth();
+loadModels();
+</script>
+</body>
+</html>
