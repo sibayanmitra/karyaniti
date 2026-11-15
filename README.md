@@ -62,7 +62,7 @@ Open http://localhost:8765 for the main UI, or http://localhost:8765/dev for the
 
 ## What I learned
 
-- **Lawyers want recall, with confidence marked.** My first versions hid anything that failed a check. The lawyers and law students I showed it to wanted the opposite: show every relevant authority and mark how sure the tool is. A verified but thin answer loses to an unverified but complete one, because they will read the cases themselves anyway.
+- **Users want recall, with confidence marked.** My first versions hid anything that failed a check. The three or four law students I showed it to, all of whom had done legal internships, wanted the opposite: show every relevant authority and mark how sure the tool is. A verified but thin answer loses to an unverified but complete one, because they will read the cases themselves anyway.
 - **Attribution is the hard verification problem.** Checking that a quote exists is easy. The damaging errors were quotes that were real but came from counsel's submissions or from an earlier judgment being discussed.
 - **Retrieval was the bottleneck.** Keyword search on Indian Kanoon is weak for case-name and doctrine queries. Most of the later work, including the authority index, was about getting the right judgment into the candidate set at all. No amount of verification helps if the leading case was never retrieved.
 
