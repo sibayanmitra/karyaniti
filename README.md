@@ -68,7 +68,7 @@ Open http://localhost:8765 for the main UI, or http://localhost:8765/dev for the
 
 ## Why I stopped
 
-The retrieval problem needs a proper index of Indian case law, which is a data and licensing project more than a modelling one, and the good-law check needs a real citator. Both are larger than what I could build alongside my research work, so I stopped here.
+The blocker was the data source. A tool like this is only as trustworthy as the text it checks against, and a verified source of Indian case law was hard to get. The databases lawyers actually trust, such as SCC Online and Manupatra, are run by large companies and sit behind paywalls. Without access to one of them, I could verify against Indian Kanoon but could not give lawyers the reporter-grade text and treatment status they rely on, so I stopped here.
 
 ## Limitations
 
