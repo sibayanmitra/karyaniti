@@ -1,0 +1,441 @@
+{
+  "_meta": {
+    "schema_version": 1,
+    "description": "Treatment status of Supreme Court of India cases. Tid is Indian Kanoon document ID. Status values: overruled, partially_overruled, doubted, superseded_by_statute, modified, confirmed.",
+    "maintainer": "Karyaniti project",
+    "last_reviewed": "2026-05",
+    "limitations": "Hand-curated seed list. Not a comprehensive citator. Always verify treatment status independently before relying on any judgment."
+  },
+  "1885496": {
+    "case_name": "M/s Whirlpool Corp v Registrar of Trade Marks (1998)",
+    "status": "confirmed",
+    "note": "Frequently relied on for writ jurisdiction under Art 226 alternative remedy rule; no overruling.",
+    "on_point": "Alternative remedy rule under Article 226"
+  },
+  "61280287": {
+    "case_name": "Shafhi Mohammed v State of HP (2018)",
+    "status": "overruled",
+    "overruled_by_tid": "131202146",
+    "overruled_by_name": "Arjun Panditrao Khotkar v Kailash Kushanrao Gorantyal (2020)",
+    "on_point": "Section 65B Evidence Act certificate requirement — Shafhi held certificate dispensable in some cases; Arjun Panditrao 3J restored Anvar PV mandatory certificate rule.",
+    "year_overruled": 2020
+  },
+  "1813727": {
+    "case_name": "Anvar P.V. v P.K. Basheer (2014)",
+    "status": "partially_overruled",
+    "overruled_by_tid": "131202146",
+    "overruled_by_name": "Arjun Panditrao Khotkar v Kailash Kushanrao Gorantyal (2020)",
+    "on_point": "Section 65B Evidence Act. Anvar P.V. held certificate mandatory; Arjun Panditrao clarified procedural aspects but maintained mandatory nature. Cite Arjun Panditrao for the current rule.",
+    "year_overruled": 2020
+  },
+  "1120620": {
+    "case_name": "Y. Abraham Ajith v Inspector of Police, Chennai (2004)",
+    "status": "overruled",
+    "overruled_by_tid": "78252061",
+    "overruled_by_name": "Rupali Devi v State of UP (2019)",
+    "on_point": "Territorial jurisdiction for cruelty (Section 498A IPC). Abraham Ajith required complaint at place of cruelty; Rupali Devi (constitution bench) held complaint can also be filed where consequences felt (matrimonial home).",
+    "year_overruled": 2019
+  },
+  "1820512": {
+    "case_name": "SBP & Co. v Patel Engineering Ltd (2005)",
+    "status": "partially_overruled",
+    "overruled_by_tid": "188958994",
+    "overruled_by_name": "Booz Allen Hamilton Inc v SBI Home Finance (2011); further modified by Section 11 amendments (2015, 2019)",
+    "on_point": "Scope of judicial intervention under Section 11 Arbitration Act. SBP & Co. held Section 11 to be judicial; subsequent statutory amendments and Vidya Drolia line narrowed the inquiry significantly.",
+    "year_overruled": 2015
+  },
+  "110552": {
+    "case_name": "Bhatia International v Bulk Trading (2002)",
+    "status": "overruled",
+    "overruled_by_tid": "193482810",
+    "overruled_by_name": "Bharat Aluminium Co (BALCO) v Kaiser Aluminium (2012)",
+    "on_point": "Application of Part I of Arbitration Act to foreign-seated arbitrations. Bhatia held Part I applies unless excluded; BALCO 5J overruled this prospectively for agreements after 06-Sept-2012.",
+    "year_overruled": 2012
+  },
+  "549946": {
+    "case_name": "Adalat Prasad v Rooplal Jindal (2004)",
+    "status": "confirmed",
+    "note": "Holds magistrate cannot recall summoning order after issuing it; only High Court can quash. Repeatedly affirmed.",
+    "on_point": "Recall of summoning order under CrPC"
+  },
+  "1108032": {
+    "case_name": "Siddharam Satlingappa Mhetre v State of Maharashtra (2010)",
+    "status": "partially_overruled",
+    "overruled_by_tid": "123660783",
+    "overruled_by_name": "Sushila Aggarwal v State NCT of Delhi (2020) Constitution Bench",
+    "on_point": "Duration of anticipatory bail. Mhetre held anticipatory bail need not be time-limited; Sushila Aggarwal (5J) affirmed this in principle but clarified courts may impose limits in appropriate cases. Cite Sushila Aggarwal for current rule.",
+    "year_overruled": 2020
+  },
+  "1308768": {
+    "case_name": "Gurbaksh Singh Sibbia v State of Punjab (1980)",
+    "status": "confirmed",
+    "note": "Foundational anticipatory bail authority; reaffirmed in Sushila Aggarwal (2020).",
+    "on_point": "Section 438 CrPC anticipatory bail principles"
+  },
+  "1363234": {
+    "case_name": "Indra Sawhney v Union of India (1992)",
+    "status": "modified",
+    "note": "EWS reservation (10%) upheld in Janhit Abhiyan (2022) modifies the 50% ceiling rule from Indra Sawhney for economically weaker sections. SC/ST/OBC reservation framework intact.",
+    "on_point": "50% ceiling on reservations",
+    "year_modified": 2022
+  },
+  "91938676": {
+    "case_name": "K.S. Puttaswamy v Union of India (2017) 9-Judge",
+    "status": "confirmed",
+    "note": "Privacy as fundamental right. Foundational. Aadhaar 5J (2018) applied this framework with modifications to Aadhaar Act.",
+    "on_point": "Right to privacy"
+  },
+  "168671544": {
+    "case_name": "Navtej Singh Johar v Union of India (2018)",
+    "status": "confirmed",
+    "note": "Decriminalised Section 377 IPC for consensual same-sex acts. Overruled Suresh Kumar Koushal (2013) which had reversed Naz Foundation.",
+    "on_point": "Section 377 IPC"
+  },
+  "42184625": {
+    "case_name": "Joseph Shine v Union of India (2018)",
+    "status": "confirmed",
+    "note": "Struck down Section 497 IPC (adultery). Overruled Sowmithri Vishnu (1985), V. Revathi (1988), W. Kalyani (2012).",
+    "on_point": "Section 497 IPC (adultery)"
+  },
+  "1762508": {
+    "case_name": "Lily Thomas v Union of India (2000)",
+    "status": "confirmed",
+    "note": "Conversion to Islam for second marriage = bigamy. Reaffirmed by Sarla Mudgal line.",
+    "on_point": "Bigamy and religious conversion"
+  },
+  "115701246": {
+    "case_name": "Shayara Bano v Union of India (2017)",
+    "status": "superseded_by_statute",
+    "note": "Triple talaq held unconstitutional. Parliament enacted Muslim Women (Protection of Rights on Marriage) Act 2019, which criminalises the practice. For current legal position cite both Shayara Bano and the 2019 Act.",
+    "on_point": "Triple talaq",
+    "year_modified": 2019
+  },
+  "10239019": {
+    "case_name": "Lalita Kumari v Govt of UP (2013) Constitution Bench",
+    "status": "confirmed",
+    "note": "Mandatory FIR registration for cognizable offences. Standing position.",
+    "on_point": "Section 154 CrPC FIR registration"
+  },
+  "69949024": {
+    "case_name": "Gian Singh v State of Punjab (2012)",
+    "status": "confirmed",
+    "note": "Quashing of FIR in compoundable/private matrimonial disputes despite non-compoundability. Reaffirmed by Narinder Singh (2014), Parbatbhai Aahir (2017).",
+    "on_point": "Section 482 CrPC quashing in matrimonial cases"
+  },
+  "1033637": {
+    "case_name": "State of Haryana v Bhajan Lal (1992)",
+    "status": "confirmed",
+    "note": "Foundational seven categories for FIR quashing under Section 482. Universally cited and good law.",
+    "on_point": "Quashing of FIR — Bhajan Lal categories"
+  },
+  "166780307": {
+    "case_name": "Mobilox Innovations v Kirusa Software (2017)",
+    "status": "confirmed",
+    "note": "Definition of 'pre-existing dispute' under Section 9 IBC for operational creditors. Standing position.",
+    "on_point": "Section 9 IBC pre-existing dispute"
+  },
+  "4992553": {
+    "case_name": "B.K. Educational Services v Parag Gupta (2018)",
+    "status": "confirmed",
+    "note": "Limitation Act applies to IBC applications under Sections 7 and 9. Reaffirmed by subsequent benches.",
+    "on_point": "Limitation Act applicability to IBC"
+  },
+  "17372683": {
+    "case_name": "Swiss Ribbons v Union of India (2019)",
+    "status": "confirmed",
+    "note": "Constitutional validity of IBC upheld. Distinction between financial and operational creditors valid.",
+    "on_point": "IBC constitutional validity"
+  },
+  "127312055": {
+    "case_name": "Vidya Drolia v Durga Trading Corporation (2020)",
+    "status": "confirmed",
+    "note": "Four-fold test for arbitrability; minimal judicial intervention at Section 11 stage. Standing arbitration position.",
+    "on_point": "Arbitrability of disputes; Section 11 scope"
+  },
+  "188958994": {
+    "case_name": "Booz Allen Hamilton v SBI Home Finance (2011)",
+    "status": "confirmed",
+    "note": "Tests for arbitrability — rights in rem vs rights in personam. Refined but not overruled by Vidya Drolia.",
+    "on_point": "Arbitrability framework"
+  },
+  "1591400": {
+    "case_name": "Sukanya Holdings v Jayesh H. Pandya (2003)",
+    "status": "partially_overruled",
+    "overruled_by_tid": "127312055",
+    "overruled_by_name": "Vidya Drolia (2020); also addressed in Cox & Kings (2023)",
+    "on_point": "Whether non-signatories can be impleaded in arbitration. Sukanya Holdings held strict approach; subsequent cases (Chloro Controls, Cox & Kings) recognised group of companies doctrine.",
+    "year_overruled": 2020
+  },
+  "1486949": {
+    "case_name": "M.C. Mehta v Union of India (Oleum gas leak, 1986)",
+    "status": "confirmed",
+    "note": "Absolute liability principle for hazardous industries. Distinct from Rylands v Fletcher. Standing environmental law authority.",
+    "on_point": "Absolute liability"
+  },
+  "184449972": {
+    "case_name": "Common Cause v Union of India (2018) Passive Euthanasia",
+    "status": "modified",
+    "note": "Passive euthanasia legalised with living will procedure. Procedure simplified by Constitution Bench (2023) which removed magistrate involvement requirement. For current procedure cite both.",
+    "on_point": "Passive euthanasia and living will",
+    "year_modified": 2023
+  },
+  "338008": {
+    "case_name": "Selvi v State of Karnataka (2010)",
+    "status": "confirmed",
+    "note": "Narco-analysis, polygraph, BEAP without consent unconstitutional under Articles 20(3) and 21. Standing position.",
+    "on_point": "Forensic techniques and self-incrimination"
+  },
+  "1259796": {
+    "case_name": "State of Punjab v Baldev Singh (1999) Constitution Bench",
+    "status": "confirmed",
+    "note": "Section 50 NDPS — mandatory information of right to be searched before gazetted officer. Reaffirmed by State of Rajasthan v Parmanand (2014) Constitution Bench.",
+    "on_point": "Section 50 NDPS Act"
+  },
+  "1046545": {
+    "case_name": "State of Punjab v Gurmit Singh (1996)",
+    "status": "confirmed",
+    "note": "Standard of proof in rape cases; victim's testimony as substantive evidence. Foundational.",
+    "on_point": "Rape — evidentiary standards"
+  },
+  "545301": {
+    "case_name": "Machhi Singh v State of Punjab (1983)",
+    "status": "modified",
+    "note": "Rarest of rare doctrine for death sentence. Refined by Sangeet v Haryana (2012), Shankar Kisanrao Khade (2013), Bachan Singh foundational. Apply with Bachan Singh framework.",
+    "on_point": "Death sentence — rarest of rare"
+  },
+  "307021": {
+    "case_name": "Bachan Singh v State of Punjab (1980) Constitution Bench",
+    "status": "confirmed",
+    "note": "Foundational rarest of rare framework. Section 354(3) CrPC constitutional.",
+    "on_point": "Death penalty constitutionality"
+  },
+  "989335": {
+    "case_name": "Swamy Shraddananda v State of Karnataka (2008)",
+    "status": "confirmed",
+    "note": "Special category of sentence — life imprisonment without remission for full natural life. Reaffirmed by Union of India v Sriharan (2015) Constitution Bench.",
+    "on_point": "Life imprisonment without remission"
+  },
+  "1281050": {
+    "case_name": "Ramana Dayaram Shetty v International Airport Authority (1979)",
+    "status": "confirmed",
+    "note": "State action doctrine under Art 12. Refined by Ajay Hasia (1981), Pradeep Kumar Biswas (2002), Zee Telefilms (2005).",
+    "on_point": "Definition of State under Article 12"
+  },
+  "1186368": {
+    "case_name": "Ajay Hasia v Khalid Mujib Sehravardi (1981)",
+    "status": "modified",
+    "overruled_by_tid": "85806537",
+    "overruled_by_name": "Pradeep Kumar Biswas v Indian Institute of Chemical Biology (2002) 7-Judge",
+    "on_point": "State under Article 12. Ajay Hasia laid functional tests; Pradeep Kumar Biswas modified the approach requiring 'deep and pervasive' state control.",
+    "year_modified": 2002
+  },
+  "1728255": {
+    "case_name": "Andi Mukta Sadguru v V.R. Rudani (1989)",
+    "status": "confirmed",
+    "note": "Writ jurisdiction under Art 226 extends to non-state actors performing public functions. Standing position.",
+    "on_point": "Article 226 writ against private bodies"
+  },
+  "1004292": {
+    "case_name": "Executive Committee of Vaish Degree College v Lakshmi Narain (1976)",
+    "status": "modified",
+    "note": "Specific performance of service contract not generally available. Modified by subsequent service jurisprudence; standing rule with exceptions.",
+    "on_point": "Specific performance of personal service contracts"
+  },
+  "1591733": {
+    "case_name": "Secretary, State of Karnataka v Umadevi (2006) Constitution Bench",
+    "status": "confirmed",
+    "note": "Regularisation of irregular appointments. Limited one-time exception for those with 10+ years service. Repeatedly cited.",
+    "on_point": "Regularisation of temporary/contractual employees"
+  },
+  "1416283": {
+    "case_name": "D.S. Nakara v Union of India (1982) Constitution Bench",
+    "status": "confirmed",
+    "note": "Pension cut-off date held arbitrary. Foundational on pension as deferred wage.",
+    "on_point": "Pension and Article 14"
+  },
+  "655432": {
+    "case_name": "Mritunjoy Pani v Narmada Bala Sasmal (1961)",
+    "status": "confirmed",
+    "note": "Frequently cited for evidence law; no overruling.",
+    "on_point": "Estoppel under Section 115 Evidence Act"
+  },
+  "823221": {
+    "case_name": "Mohd. Ahmed Khan v Shah Bano Begum (1985)",
+    "status": "superseded_by_statute",
+    "note": "Muslim Women (Protection of Rights on Divorce) Act 1986 was enacted partly to limit Shah Bano. Danial Latifi (2001) interpreted the Act consistently with Shah Bano. Cite Danial Latifi for current position.",
+    "on_point": "Section 125 CrPC and Muslim divorced women",
+    "year_modified": 1986
+  },
+  "410660": {
+    "case_name": "Danial Latifi v Union of India (2001)",
+    "status": "confirmed",
+    "note": "Constitutional validity of 1986 Act upheld but interpreted to require fair provision for entire life. Current position on Muslim women maintenance.",
+    "on_point": "Muslim Women (Protection of Rights on Divorce) Act 1986"
+  },
+  "283310": {
+    "case_name": "Shabana Bano v Imran Khan (2009)",
+    "status": "confirmed",
+    "note": "Reaffirmed Danial Latifi; Section 125 CrPC available to divorced Muslim women.",
+    "on_point": "Section 125 CrPC and Muslim divorced women"
+  },
+  "55786": {
+    "case_name": "SR Bommai v Union of India (1994)",
+    "status": "confirmed",
+    "note": "President's Rule under Art 356 — judicial review framework. Standing constitutional law authority.",
+    "on_point": "Article 356 and judicial review"
+  },
+  "1041403": {
+    "case_name": "Bihar Legal Support Society v Chief Justice of India (1986)",
+    "status": "confirmed",
+    "note": "Standard articulation that SC is constitutional court with constitutional questions priority.",
+    "on_point": "Scope of Article 136"
+  },
+  "1565619": {
+    "case_name": "Suraj Lamp & Industries v State of Haryana (2011)",
+    "status": "confirmed",
+    "note": "GPA/SA/will agreements cannot transfer immovable property title. Standing rule.",
+    "on_point": "Property transfer through power of attorney"
+  },
+  "199096823": {
+    "case_name": "Ravinder Kaur Grewal v Manjit Kaur (2019)",
+    "status": "confirmed",
+    "note": "Plea of adverse possession can be used as both shield and sword. Modified earlier position from Gurdwara Sahib v Gram Panchayat (2014).",
+    "on_point": "Adverse possession"
+  },
+  "85806537": {
+    "case_name": "Pradeep Kumar Biswas v Indian Institute of Chemical Biology (2002) 7-Judge",
+    "status": "confirmed",
+    "note": "Refined State under Article 12 with deep and pervasive control test. Current authoritative test.",
+    "on_point": "Article 12 — State"
+  },
+  "404603": {
+    "case_name": "Zee Telefilms v Union of India (2005)",
+    "status": "confirmed",
+    "note": "Applied Pradeep Kumar Biswas to find BCCI not State. Standing position on quasi-public bodies.",
+    "on_point": "Article 12 — State"
+  },
+  "117859307": {
+    "case_name": "Nikesh Tarachand Shah v Union of India (2017)",
+    "status": "partially_overruled",
+    "overruled_by_tid": "117249167",
+    "overruled_by_name": "Vijay Madanlal Choudhary v Union of India (2022)",
+    "on_point": "Twin conditions for bail under Section 45 PMLA. Nikesh Tarachand struck down provision; subsequent amendment + Vijay Madanlal upheld revived twin conditions.",
+    "year_overruled": 2022
+  },
+  "117249167": {
+    "case_name": "Vijay Madanlal Choudhary v Union of India (2022)",
+    "status": "confirmed",
+    "note": "Constitutional validity of PMLA upheld broadly. Recently re-examined in part by referral to larger bench (2023). Watch for developments.",
+    "on_point": "PMLA constitutional validity",
+    "warning": "Some aspects under reference to larger bench (2023+); confirm current status before relying."
+  },
+  "90251163": {
+    "case_name": "P. Chidambaram v Directorate of Enforcement (2019)",
+    "status": "confirmed",
+    "note": "Bail framework in economic offences. Standing authority.",
+    "on_point": "Bail in PMLA cases"
+  },
+  "132771982": {
+    "case_name": "Satender Kumar Antil v CBI (2022)",
+    "status": "confirmed",
+    "note": "Bail guidelines and directions for arrest discretion. Standing.",
+    "on_point": "Bail in offences below 7 years; Section 41A CrPC"
+  },
+  "1563495": {
+    "case_name": "Sanjay Chandra v CBI (2011)",
+    "status": "confirmed",
+    "note": "Bail principles in economic offences — bail is rule, jail exception. Standing.",
+    "on_point": "Bail in economic offences"
+  },
+  "534034": {
+    "case_name": "Gurcharan Singh v State Delhi Administration (1978)",
+    "status": "confirmed",
+    "note": "Foundational on factors for bail consideration. Reaffirmed across decades.",
+    "on_point": "Bail factors under CrPC"
+  },
+  "499461": {
+    "case_name": "Narcotics Control Bureau v Kishan Lal (1991) Constitution Bench",
+    "status": "confirmed",
+    "note": "Section 37 NDPS — twin conditions for bail. Standing.",
+    "on_point": "Section 37 NDPS bail"
+  },
+  "1372168": {
+    "case_name": "Mukesh & Anr v State for NCT of Delhi (2017) — Nirbhaya case",
+    "status": "confirmed",
+    "note": "Affirmed death sentences. Review and curative dismissed. No subsequent overruling.",
+    "on_point": "Death sentence confirmation procedure"
+  },
+  "171510013": {
+    "case_name": "Mohanlal Shamji Soni v Union of India (1991)",
+    "status": "confirmed",
+    "note": "Section 311 CrPC — court's power to summon witness. Standing.",
+    "on_point": "Section 311 CrPC"
+  },
+  "111899692": {
+    "case_name": "Mallikarjun Kodagali v State of Karnataka (2018)",
+    "status": "confirmed",
+    "note": "Victim's right to appeal under Section 372 CrPC proviso. Standing.",
+    "on_point": "Victim's right to appeal"
+  },
+  "1761133": {
+    "case_name": "Himachal Pradesh Administration v Om Prakash (1975)",
+    "status": "confirmed",
+    "note": "Standing authority on suspicious circumstances in dying declaration.",
+    "on_point": "Dying declaration evaluation"
+  },
+  "1007294": {
+    "case_name": "Paniben v State of Gujarat (1992)",
+    "status": "confirmed",
+    "note": "Foundational on standards for dying declaration. Repeatedly cited.",
+    "on_point": "Dying declaration"
+  },
+  "1326499": {
+    "case_name": "Ishwari Prasad Misra v Mohammad Isa (1962)",
+    "status": "confirmed",
+    "note": "Older case on circumstantial evidence threshold. Still cited but consider Sharad Birdhichand Sarda (1984) as primary authority.",
+    "on_point": "Circumstantial evidence"
+  },
+  "13149785": {
+    "case_name": "Sharad Birdhichand Sarda v State of Maharashtra (1984)",
+    "status": "confirmed",
+    "note": "Five panchsheel principles for circumstantial evidence. Foundational and standing.",
+    "on_point": "Circumstantial evidence — panchsheel"
+  },
+  "1303013": {
+    "case_name": "K.M. Nanavati v State of Maharashtra (1962)",
+    "status": "confirmed",
+    "note": "Grave and sudden provocation under Exception 1 to Section 300 IPC. Standing despite age.",
+    "on_point": "Provocation defence"
+  },
+  "1675407": {
+    "case_name": "Bhim Sen v State of Punjab (1975)",
+    "status": "modified",
+    "note": "Earlier position on Section 34/149 IPC distinctions has been clarified by Bachan Singh, Maina Singh, Mukesh & State of UP lines.",
+    "on_point": "Common intention vs common object"
+  },
+  "1604325": {
+    "case_name": "State of Maharashtra v Wasudeo Ramchandra Kaidalwar (1981)",
+    "status": "confirmed",
+    "note": "Disproportionate assets — burden of proof under Prevention of Corruption Act. Standing.",
+    "on_point": "PC Act — disproportionate assets"
+  },
+  "534167": {
+    "case_name": "Shyamal Kumar Roy v Sushil Kumar Agarwal (2006)",
+    "status": "confirmed",
+    "note": "Standing position on benami transactions pre-2016 amendment. After Benami Transactions (Prohibition) Amendment Act 2016, see Ganpati Dealcom (2022).",
+    "on_point": "Benami transactions",
+    "warning": "Statutory framework changed in 2016 and revisited in Ganpati Dealcom (2022); confirm applicable period."
+  },
+  "101264378": {
+    "case_name": "Union of India v Ganpati Dealcom (2022)",
+    "status": "confirmed",
+    "note": "Held 2016 Benami Act amendments cannot apply retrospectively. Standing position on retrospectivity.",
+    "on_point": "Benami Act retrospectivity"
+  },
+  "133099424": {
+    "case_name": "Ghulam Hassan Beigh v Mohammad Maqbool Magrey (2022)",
+    "status": "confirmed",
+    "note": "Recent. Confession to police officer under Section 25 Evidence Act inadmissible — reaffirmed.",
+    "on_point": "Confession to police"
+  }
+}

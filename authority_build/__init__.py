@@ -1,0 +1,1 @@
+"""Karyaniti authority index builder."""

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karyaniti — Legal Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Tiro+Devanagari+Hindi:ital@0;1&family=Geist:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- ───────── Reusable brand mark (SVG with stacked 3D extrusion) ───────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bm-face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#faf5e8"/>
+      <stop offset=".48" stop-color="#ebe2cc"/>
+      <stop offset="1" stop-color="#b6a378"/>
+    </linearGradient>
+    <linearGradient id="bm-rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d2e1f" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#3d2e1f" stop-opacity=".7"/>
+    </linearGradient>
+    <symbol id="brand-mark" viewBox="0 0 240 64" overflow="visible">
+      <!-- कार्य : Devanagari, light 3D extrusion (one shadow layer + face) -->
+      <g font-family="'Tiro Devanagari Hindi', serif" font-size="36" font-weight="400">
+        <text x="2" y="46" fill="#8a6c44" opacity=".55">कार्य</text>
+        <text x="0" y="44" fill="#3d2e1f">कार्य</text>
+      </g>
+      <!-- niti : hand-drawn lowercase, t reimagined as a balance.
+           Both i-dots double as the scale pans hanging from the crossbar. -->
+      <!-- shadow layer (offset down + right) -->
+      <g stroke="#8a6c44" stroke-opacity=".45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(-24,2)">
+        <path d="M 134 44 V 26"/>
+        <path d="M 134 28 Q 138 22 144 22 Q 150 22 150 28 V 44"/>
+        <path d="M 161 28 V 44"/>
+        <path d="M 187 14 V 40 Q 187 44 191 44"/>
+        <path d="M 156 22 L 218 22"/>
+        <path d="M 161 22 V 17"/>
+        <path d="M 156 17 Q 161 21 166 17"/>
+        <path d="M 213 22 V 17"/>
+        <path d="M 208 17 Q 213 21 218 17"/>
+        <path d="M 213 28 V 44"/>
+      </g>
+      <!-- face layer -->
+      <g stroke="#3d2e1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="translate(-26,0)">
+        <!-- n -->
+        <path d="M 134 44 V 26"/>
+        <path d="M 134 28 Q 138 22 144 22 Q 150 22 150 28 V 44"/>
+        <!-- i#1 stem (its dot becomes the left scale pan) -->
+        <path d="M 161 28 V 44"/>
+        <!-- t : vertical post is the scale column -->
+        <path d="M 187 14 V 40 Q 187 44 191 44"/>
+        <!-- scale beam -->
+        <path d="M 156 22 L 218 22"/>
+        <!-- left chain + pan (dot of i#1) -->
+        <path d="M 161 22 V 17"/>
+        <path d="M 156 17 Q 161 21 166 17"/>
+        <!-- right chain + pan (dot of i#2) -->
+        <path d="M 213 22 V 17"/>
+        <path d="M 208 17 Q 213 21 218 17"/>
+        <!-- i#2 stem -->
+        <path d="M 213 28 V 44"/>
+      </g>
+      <!-- gold fulcrum -->
+      <circle cx="161" cy="22" r="1.8" fill="#c89f48"/>
+      <circle cx="161" cy="22" r=".7" fill="#faf5e8"/>
+      <!-- registered mark -->
+      <g transform="translate(218,18)">
+        <circle cx="4" cy="4" r="4" fill="none" stroke="#3d2e1f" stroke-width=".7"/>
+        <text x="4" y="6" font-family="'Geist', sans-serif" font-size="5.5" font-weight="500" text-anchor="middle" fill="#3d2e1f">R</text>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ───────── Header ───────── -->
+<header class="hd">
+  <div class="hd-l">
+    <a href="#research" class="brand" aria-label="Karyaniti — home">
+      <svg class="brand-mark brand-mark-sm" viewBox="0 0 240 64" aria-hidden="true"><use href="#brand-mark"/></svg>
+    </a>
+    <span class="brand-sub">Indian case-law research, verified at the source.</span>
+  </div>
+  <nav class="hd-c">
+    <a href="#research" class="nv-on">Research</a>
+    <a href="#corpus">Corpus</a>
+  </nav>
+  <div class="hd-r">
+    <span class="clk" id="clock">IST 00:00</span>
+    <span class="dot" id="hDot"></span>
+    <span class="hStat" id="hStat">connecting</span>
+  </div>
+</header>
+
+<!-- ───────── Marquee ticker ───────── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ───────── Hero ───────── -->
+<main id="research" class="stage">
+
+  <aside class="rail rail-l">
+    <div class="rail-num">01 / Recent</div>
+    <div class="rail-list" id="historyList">
+      <p class="hist-empty">No previous queries yet.</p>
+    </div>
+  </aside>
+
+  <section class="hero">
+    <h1 class="display sr" data-sr-stagger>
+      <span class="row"><span class="row-i">A quiet desk</span></span>
+      <span class="row"><span class="row-i"><em>for difficult</em></span></span>
+      <span class="row"><span class="row-i">questions of law.</span></span>
+    </h1>
+
+    <p class="lede sr">
+      Every holding you read here was lifted from a real Supreme Court or High Court
+      judgment — fetched live from the official corpus, paragraph-tagged, then put
+      through a five-step verification pass before it ever reaches you.
+    </p>
+
+    <!-- portrait + glass search -->
+    <figure class="portrait sr">
+      <div class="portrait-frame">
+        <div class="portrait-img">
+          <img src="assets/lawyer-portrait.png" alt="A senior advocate at his desk reviewing case papers, with a junior associate and a brass scales of justice on a polished walnut desk" />
+        </div>
+
+        <!-- glass scrim -->
+        <div class="glass">
+          <div class="glass-inner" id="glassCard">
+            <div class="glass-buffer" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="glass-row glass-meta">
+              <span class="m-eyebrow">Indian Kanoon · live corpus</span>
+              <span class="m-sep">/</span>
+              <span class="m-scope">
+                Search
+                <select id="scope">
+                  <option value="supremecourt" selected>Supreme Court of India</option>
+                  <option value="highcourts">All High Courts</option>
+                  <option value="judgments">SC + HC + District</option>
+                  <option value="delhi">Delhi HC</option>
+                  <option value="bombay">Bombay HC</option>
+                  <option value="madras">Madras HC</option>
+                  <option value="kolkata">Calcutta HC</option>
+                  <option value="allahabad">Allahabad HC</option>
+                  <option value="karnataka">Karnataka HC</option>
+                  <option value="kerala">Kerala HC</option>
+                  <option value="punjab">Punjab &amp; Haryana HC</option>
+                  <option value="tribunals">Tribunals</option>
+                </select>
+              </span>
+              <span class="m-sep">/</span>
+              <span class="m-mode">
+                Mode
+                <select id="mode">
+                  <option value="quick" selected>Quick scan</option>
+                  <option value="full">Full council</option>
+                </select>
+              </span>
+            </div>
+            <div class="glass-row glass-input">
+              <label for="q" class="q-prompt"><span class="q-bracket">[</span><span>ask</span><span class="q-bracket">]</span></label>
+              <textarea id="q" rows="1" placeholder="natural justice audi alteram partem in administrative decisions…"></textarea>
+              <button class="run" id="run">
+                <span class="run-label">Search</span>
+                <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg>
+              </button>
+            </div>
+            <div class="glass-row glass-foot">
+              <span class="kbd">⌘ ↵ to run</span>
+              <span class="state-pill" id="statePill" data-state="idle">idle</span>
+              <span class="kbd kbd-ghost" id="elapsed">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figcaption class="cap">
+        <span class="cap-l">Fig. 01 — A senior advocate, somewhere in Bombay, eight hours into a brief.</span>
+        <span class="cap-r">From the Karyaniti archive</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <aside class="rail rail-r">
+    <div class="rail-num">02 / Verification</div>
+    <div class="rail-trust">
+      <p>Every holding is independently verified against the original judgment text before reaching you.</p>
+      <p class="rail-trust-em"><em>No verification, no citation.</em></p>
+    </div>
+    <div class="rail-note">
+      Treatment status remains unverified — confirm via SCC or Manupatra before citing.
+    </div>
+  </aside>
+</main>
+
+<!-- ───────── Pipeline trace ───────── -->
+<section class="trace-wrap" id="traceWrap">
+  <div class="trace-head">
+    <span class="num">03 /</span>
+    <span class="lbl">Pipeline trace</span>
+    <span class="dim" id="traceCount">0 events</span>
+  </div>
+  <div class="trace" id="trace">
+    <div class="t-line t-dim">Waiting for query…</div>
+  </div>
+</section>
+
+<!-- ───────── Results ───────── -->
+<section class="results" id="results"></section>
+
+<!-- ───────── Footer ───────── -->
+<footer class="ft" id="corpus">
+  <div class="ft-l">
+    <svg class="brand-mark brand-mark-md" viewBox="0 0 240 64" aria-hidden="true"><use href="#brand-mark"/></svg>
+    <span class="ft-tag">Built for Indian advocates · 2026</span>
+  </div>
+  <div class="ft-c">
+    <span>Corpus: Supreme Court · 25 High Courts · Tribunals</span>
+    <span>Source: Indian Kanoon official API</span>
+  </div>
+  <div class="ft-r">
+    <span>This tool assists research. It does not replace counsel, briefs, or SCC verification.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+
+</body>
+</html>

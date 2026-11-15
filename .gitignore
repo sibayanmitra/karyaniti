@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.bak
+*.log
+data/ik_doc_cache.db
+results/
+test_results/
+test_results_*.md
+ab_test_results.json
+authority_build/*_state.json
+authority_build/authority_build_progress.json
+*.exe
